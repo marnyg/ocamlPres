@@ -1,0 +1,3 @@
+(test
+ (preprocess (pps ppx_inline_test))
+ (name myPro))

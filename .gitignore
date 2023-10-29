@@ -1,0 +1,35 @@
+# OCaml build artifacts
+*.cmi
+*.cmo
+*.cmx
+*.o
+*.a
+*.cma
+*.cmxa
+*.cmxs
+
+# Executables
+*.byte
+*.native
+
+# dune build artifacts
+_build/
+.dune/
+
+# Logs
+*.log
+
+# Dependency directory
+_deps/
+
+# IDE files
+*.merlin
+
+# macOS files
+.DS_Store
+
+# Others
+*.swp
+*.swo
+
+result
