@@ -10,12 +10,13 @@ homepage: "https://github.com/username/reponame"
 doc: "https://url/to/documentation"
 bug-reports: "https://github.com/username/reponame/issues"
 depends: [
+  "tyxml"
   "ppx_inline_test"
   "core"
-  "dream"
   "ocaml"
   "dune" {>= "3.11"}
   "alcotest" {with-test}
+  "dream"
   "odoc" {with-doc}
 ]
 build: [

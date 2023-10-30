@@ -9,9 +9,7 @@
         nixpkgs.legacyPackages.x86_64-linux.opam
         #gcc
         coreutils
-        #opam2json
-        #ocamle_make
-        #make
+        make
         libev
       ];
       shellHook = '' 
