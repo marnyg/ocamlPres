@@ -1,5 +1,4 @@
 (executable
  (public_name myPro)
  (name main)
- (preprocess (pps tyxml-ppx))
- (libraries myPro tyxml dream))
+ (libraries myPro tyxml dream dream-html))
