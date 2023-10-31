@@ -2,14 +2,14 @@
   description = "My OCaml project";
 
   outputs = { self, nixpkgs }: rec {
-    devShells.x86_64-linux = with nixpkgs.legacyPackages.x86_64-linux; mkShell {
+    devShells.x86_64-linux.default = with nixpkgs.legacyPackages.x86_64-linux; mkShell {
       buildInputs = [
+        ocamlPackages.ocaml-lsp
         ocaml
         dune_3
-        nixpkgs.legacyPackages.x86_64-linux.opam
-        #gcc
-        coreutils
-        make
+        opam
+        openssl
+        ocamlformat
         libev
       ];
       shellHook = '' 
@@ -17,6 +17,7 @@
         eval $(opam env)
         #opam install . --deps-only
       '';
+      LSP_SERVERS="ocamllsp";
     };
 
     packages.x86_64-linux.myOcamlPackage = with nixpkgs.legacyPackages.x86_64-linux; ocamlPackages.buildDunePackage rec {
