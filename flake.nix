@@ -11,6 +11,7 @@
         openssl
         ocamlformat
         libev
+        pkg-config
       ];
       shellHook = '' 
         opam switch create my_switch2 4.14.1 || opam switch my_switch2
