@@ -1,3 +1,3 @@
 (executable
  (public_name main)
- (libraries myPro tyxml dream dream-html))
+ (libraries myPro tyxml dream))

@@ -29,6 +29,7 @@
 
       buildInputs = [
         ocamlPackages.core
+        # ocamlPackages.dream # need to as a import
         ocamlPackages.alcotest
         ocamlPackages.ppx_inline_test
       ];
@@ -38,9 +39,7 @@
       doCheck = true;
       checkTarget = "test";
 
-      #preBuild = ''
-      #  dune build myPro.opam
-      #'';
+      #preBuild = ''dune build myPro.opam '';
     };
     packages.x86_64-linux.default = packages.x86_64-linux.myOcamlPackage;
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;

@@ -19,7 +19,7 @@
  (name myPro)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends dream-html tyxml ppx_inline_test core ocaml dune (alcotest :with-test) dream)
+ (depends tyxml ppx_inline_test core ocaml dune (alcotest :with-test) dream)
  (tags
   (topics "to describe" your project)))
 
