@@ -1,6 +1,8 @@
 {
   description = "My OCaml project";
 
+  inputs.nixpkgs.url = "github:nix-ocaml/nix-overlays";
+
   outputs = { self, nixpkgs }: rec {
     devShells.x86_64-linux.default = with nixpkgs.legacyPackages.x86_64-linux; mkShell {
       buildInputs = [
@@ -21,7 +23,7 @@
       LSP_SERVERS="ocamllsp";
     };
 
-    packages.x86_64-linux.myOcamlPackage = with nixpkgs.legacyPackages.x86_64-linux; ocamlPackages.buildDunePackage rec {
+    packages.x86_64-linux.default= with nixpkgs.legacyPackages.x86_64-linux; ocamlPackages.buildDunePackage rec {
       pname = "myPro";
       version = "0.1.0";
       duneVersion = "3";
@@ -29,7 +31,8 @@
 
       buildInputs = [
         ocamlPackages.core
-        # ocamlPackages.dream # need to as a import
+        ocamlPackages.dream
+        ocamlPackages.tyxml
         ocamlPackages.alcotest
         ocamlPackages.ppx_inline_test
       ];
@@ -41,7 +44,7 @@
 
       #preBuild = ''dune build myPro.opam '';
     };
-    packages.x86_64-linux.default = packages.x86_64-linux.myOcamlPackage;
+    apps.x86_64-linux.default= { type = "app"; program = "${packages.x86_64-linux.default}/bin/main"; };
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
   };
 }
