@@ -16,8 +16,8 @@
         joinedOcamlPath = pkgs.symlinkJoin { name = "ocamlLibs"; paths = scope'; };
       in
       with nixpkgs.legacyPackages.x86_64-linux; mkShell rec {
-        buildInputs = scope' ++ [ pkgs.libev pkgs.nixd pkgs.rnix-lsp pkgs.ocamlPackages.ocaml-lsp ocamlformat];
-        LSP_SERVERS= "ocamllsp, rnix, nixd";
+        buildInputs = scope' ++ [ pkgs.libev pkgs.nixd pkgs.rnix-lsp ];
+        LSP_SERVERS = "ocamllsp, rnix, nixd";
 
         shellHook = ''
           export OCAMLPATH="${joinedOcamlPath}/lib/ocaml/${scope.ocaml.version}/site-lib"
