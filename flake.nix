@@ -8,25 +8,18 @@
     devShells.x86_64-linux.default =
       let
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
         on = opam-nix.lib.x86_64-linux;
         scope = on.buildOpamProject' { } ./. { ocaml-base-compiler = "*"; };
         filterForDerivations = list: builtins.filter pkgs.lib.isDerivation list;
         scope' = filterForDerivations (builtins.attrValues scope);
 
-        ocamlEnvironment = pkgs.buildEnv {
-          name = "ocaml-environment";
-          paths = scope';
-        };
-
+        joinedOcamlPath = pkgs.symlinkJoin { name = "ocamlLibs"; paths = scope'; };
       in
       with nixpkgs.legacyPackages.x86_64-linux; mkShell rec {
-        buildInputs = with ocamlPackages; [ ocamlEnvironment pkgs.libev];
+        buildInputs = scope' ++ [ pkgs.libev pkgs.nixd pkgs.rnix-lsp ];
 
         shellHook = ''
-          export OCAMLPATH="${ocamlEnvironment}/lib/ocaml/${ocaml.version}/site-lib"
-          export OCAMLPATH="${ocamlEnvironment}/lib/ocaml/5.1.0/site-lib"
-          echo    $OCAMLPATH
+          export OCAMLPATH="${joinedOcamlPath}/lib/ocaml/${scope.ocaml.version}/site-lib"
           export NIX_PATH=nixpkgs=${nixpkgs}:$NIX_PATH
         '';
       };
