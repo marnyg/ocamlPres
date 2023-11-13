@@ -47,6 +47,7 @@ let page =
   html get_head get_body
 
 let () =
+  (* let b=  Slides.Test.lal2 in *)
   write_html_to_file "index.html" page ;
   Dream.run @@ Dream.logger @@ Dream_livereload.inject_script ()
   @@ Dream.router

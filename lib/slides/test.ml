@@ -70,3 +70,15 @@ let get_d3_slide =
            \        });\n\
            \      });\n\
            \    " ) ]
+
+
+
+open Js_of_ocaml
+let lal = ""
+let lal2 =
+  Js.export "myMathLib"
+    (object%js
+       method add x y = x +. y
+       method abs x = abs_float x
+       val zero = 0.
+     end)

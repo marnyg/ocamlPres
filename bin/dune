@@ -1,3 +1,17 @@
 (executable
  (public_name main)
+ (preprocess (pps js_of_ocaml-ppx))
+ (modes byte)
  (libraries myPro tyxml dream dream-livereload))
+
+
+(rule
+ (targets main.js)
+ (action
+  (run
+   %{bin:js_of_ocaml}
+   --source-map
+   %{dep:main.bc}
+   -o
+   %{targets}
+   --pretty)))

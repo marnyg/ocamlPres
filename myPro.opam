@@ -14,12 +14,12 @@ depends: [
   "ppx_inline_test"
   "core"
   "ocaml"
-  "ocamlformat"
-  "ocaml-lsp-server"
   "dune" {>= "3.0"}
   "alcotest" {with-test}
   "dream"
   "dream-livereload"
+  "js_of_ocaml"
+  "js_of_ocaml-ppx"
   "odoc" {with-doc}
 ]
 build: [

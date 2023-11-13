@@ -1,5 +1,5 @@
 (library
- (libraries tyxml)
+ (libraries js_of_ocaml tyxml)
  (inline_tests)
- (preprocess (pps ppx_inline_test))
+ (preprocess (pps ppx_inline_test js_of_ocaml-ppx))
  (name slides))
