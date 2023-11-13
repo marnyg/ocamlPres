@@ -88,7 +88,7 @@ let get_slides_content =
   let open Html in
   div
     ~a:[a_class ["slides"]]
-    [ section [h1 [txt "TyXML"]]
+    [ section [h1 [txt "TyXML 2"]]
     ; section [p [txt "Is cool!"]]
     ; get_d3_slide
     ; section
@@ -118,7 +118,8 @@ let page =
 
 let () =
   write_html_to_file "index.html" page ;
-  Dream.run @@ Dream.logger
+  Dream.run @@ Dream.logger @@ Dream_livereload.inject_script ()
   @@ Dream.router
-       [ Dream.get "/" (fun _ ->
+       [ Dream_livereload.route ()
+       ; Dream.get "/" (fun _ ->
              Dream.respond ~headers:[("Content-Type", "text/html")] (Format.asprintf "%a" (Tyxml.Html.pp ()) page) ) ]
