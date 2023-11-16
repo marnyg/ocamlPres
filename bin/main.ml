@@ -19,8 +19,7 @@ let get_slides_content =
     ~a:[a_class ["slides"]]
     [ section [h1 [txt "TyXML"]]
     ; section [p [txt "Is cool!"]]
-    ; MyPro.get_slide
-    ; Slides.Test.get_d3_slide
+    ; MyPro.get_d3_slide
     ; section
         [ form
             ~a:[a_method `Post; a_action "/feedback"]

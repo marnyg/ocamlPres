@@ -2,7 +2,7 @@
 
 (name myPro)
 
-; (generate_opam_files true)
+(generate_opam_files true)
 
 (source
  (github username/reponame))
@@ -32,6 +32,7 @@
    dream-livereload
    js_of_ocaml
    js_of_ocaml-ppx
+   ; js_of_ocaml-lwt
    )
  (tags
   (topics "to describe" your project)))

@@ -1,5 +1,11 @@
-(library
- (libraries js_of_ocaml tyxml)
- (inline_tests)
- (preprocess (pps ppx_inline_test js_of_ocaml-ppx))
- (name slides))
+(executable
+  (name test)
+  (modes js)
+  (libraries js_of_ocaml js_of_ocaml-ppx)
+  (preprocess (pps js_of_ocaml-ppx)))
+
+(rule
+  (targets test.js)
+  (deps (:test_exe test.bc.js))
+  (action (copy %{test_exe} %{targets})))
+
