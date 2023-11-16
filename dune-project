@@ -24,6 +24,8 @@
    ppx_inline_test
    core 
    ocaml
+   ocamlformat
+   ocaml-lsp-server
    dune 
    (alcotest :with-test) 
    dream
