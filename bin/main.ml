@@ -12,7 +12,7 @@ let get_head =
     [ link ~rel:[`Stylesheet] ~href:"https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css" ()
     ; script ~a:[a_src "https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"] (txt "")
     ; script ~a:[a_src "https://d3js.org/d3.v5.min.js"] (txt "")
-    ; script ~a:[a_src "slides/test.js"] (txt "") ]
+    ; script ~a:[a_src "slides/main.js"] (txt "") ]
 
 let get_slides_content =
   let open Html in
@@ -52,6 +52,7 @@ let () =
   Dream.run @@ Dream.logger @@ Dream_livereload.inject_script ()
   @@ Dream.router
        [ Dream_livereload.route ()
-       ; Dream.get "/slides/**" @@ Dream.static "_build/default/lib/slides"
+       ; Dream.get "/slides/**" @@ Dream.static "_build/default/bin/"
+       (* ; Dream.get "/slides/**" @@ Dream.static "_build/default/lib/slides" *)
        ; Dream.get "/" (fun _ ->
              Dream.respond ~headers:[("Content-Type", "text/html")] (Format.asprintf "%a" (Tyxml.Html.pp ()) page) ) ]

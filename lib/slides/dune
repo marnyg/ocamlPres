@@ -1,11 +1,22 @@
 (executable
   (name test)
-  (modes js)
+  (modes byte)
   (libraries js_of_ocaml js_of_ocaml-ppx)
-  (preprocess (pps js_of_ocaml-ppx)))
+  (preprocess (pps js_of_ocaml-ppx))
+)
 
 (rule
   (targets test.js)
-  (deps (:test_exe test.bc.js))
-  (action (copy %{test_exe} %{targets})))
+  (action 
+    (run
+   %{bin:js_of_ocaml}
+   --source-map
+   %{dep:test.bc}
+   -o
+   %{targets}
+   ; --opt 3
+   ; --pretty
+    )
+  )
+)
 
