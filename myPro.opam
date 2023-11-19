@@ -20,8 +20,6 @@ depends: [
   "alcotest" {with-test}
   "dream"
   "dream-livereload"
-  "js_of_ocaml"
-  "js_of_ocaml-ppx"
   "odoc" {with-doc}
 ]
 build: [

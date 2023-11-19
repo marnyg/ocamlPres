@@ -30,9 +30,6 @@
    (alcotest :with-test) 
    dream
    dream-livereload
-   js_of_ocaml
-   js_of_ocaml-ppx
-   ; js_of_ocaml-lwt
    )
  (tags
   (topics "to describe" your project)))
