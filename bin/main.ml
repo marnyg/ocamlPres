@@ -19,57 +19,49 @@ let get_head =
 
 let get_slides_content =
   let open Html in
+  let charta =
+    {|
+     %%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
+       flowchart TD  
+         A[Start] --> B{Is it?};
+         B -- No ----> E[End];
+    |}
+  in
+  let chartb =
+    {|
+    %%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
+     flowchart TD  
+       A[Start] --> B{Is it?};
+       B -- Yes --> C[OK];
+       C --> D[Rethink];
+       D --> B;
+            B -- No ----> E[End];
+    |}
+  in
+  let markdown =
+      {|
+    ## Slide 1
+    A paragraph with some text and a [link](https://hakim.se).
+    ---
+    ## Slide 2
+    ---
+    ## Slide 3
+    - Item 1
+    - Item 2
+     ```js [1-2|3|4]
+    let a = 1;
+    let b = 2;
+    let c = x => 1 + 2 + x;
+    c(3);
+    ```
+    |}
+  in
   div
     ~a:[a_class ["slides"]]
     [ section [h1 [txt "TyXML"]]
-    ; section
-        ~a:[a_user_data "transition" "fade-in"]
-        [ div
-            ~a:[a_class ["mermaid"]]
-            [ pre
-                [ txt
-                    " \n\
-                    \     %%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%\n\
-                    \          flowchart TD  \n\
-                    \            A[Start] --> B{Is it?};\n\
-                    \            B -- No ----> E[End];\n\n\
-                    \    " ] ] ]
-    ; section
-        ~a:[a_user_data "transition" "fade-in"]
-        [ div
-            ~a:[a_class ["mermaid"]]
-            [ pre
-                [ txt
-                    " \n\
-                    \     %%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%\n\
-                    \          flowchart TD  \n\
-                    \            A[Start] --> B{Is it?};\n\
-                    \            B -- Yes --> C[OK];\n\
-                    \            C --> D[Rethink];\n\
-                    \            D --> B;\n\
-                    \            B -- No ----> E[End];\n\n\
-                    \    " ] ] ]
-    ; section
-        ~a:[a_user_data "markdown" ""]
-        [ textarea
-            ~a:[a_user_data "template" ""]
-            (txt
-               "\n\
-               \    ## Slide 1\n\
-               \    A paragraph with some text and a [link](https://hakim.se).\n\
-               \    ---\n\
-               \    ## Slide 2\n\
-               \    ---\n\
-               \    ## Slide 3\n\
-               \    - Item 1\n\
-               \    - Item 2\n\
-               \     ```js [1-2|3|4]\n\
-               \    let a = 1;\n\
-               \    let b = 2;\n\
-               \    let c = x => 1 + 2 + x;\n\
-               \    c(3);\n\
-               \    ```\n\
-               \    " ) ]
+    ; section ~a:[a_user_data "transition" "fade-in"] [div ~a:[a_class ["mermaid"]] [pre [txt charta]]]
+    ; section ~a:[a_user_data "transition" "fade-in"] [div ~a:[a_class ["mermaid"]] [pre [txt chartb]]]
+    ; section ~a:[a_user_data "markdown" ""] [textarea ~a:[a_user_data "template" ""] (txt markdown)]
     ; MyPro.get_d3_slide
     ; section
         [ form
